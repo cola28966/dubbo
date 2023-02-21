@@ -57,10 +57,12 @@ public class SpringExtensionInjector implements ExtensionInjector {
         }
 
         //check @SPI annotation
+        // 检查:type必须为接口且必须包含@SPI注解
         if (type.isInterface() && type.isAnnotationPresent(SPI.class)) {
             return null;
         }
 
+        // 从Spring容器中查找Bean
         T bean = getOptionalBean(context, name, type);
         if (bean != null) {
             return bean;
